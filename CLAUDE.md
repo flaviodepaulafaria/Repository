@@ -68,7 +68,6 @@ Allowed scopes (loose): `auth`, `jobs`, `employer`, `admin`, `ui`, `context`, `s
 - **How to test** — concrete steps a reviewer can follow in the browser.
 - **QA evidences** — required for any feature change.
 
-
 **Review checklist (author self-review before requesting):**
 - [ ] No `console.log` or debug statements left in code.
 - [ ] No hardcoded strings that should be constants or config.
