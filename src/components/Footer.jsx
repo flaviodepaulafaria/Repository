@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CookiePolicyModal from "./CookiePolicyModal";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
 import TermsOfServiceModal from "./TermsOfServiceModal";
 
 const Footer = () => {
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
+  const [privacyPolicyOpen, setPrivacyPolicyOpen] = useState(false);
   const [termsOpen, setTermsOpen] = useState(false);
 
   return (
@@ -148,10 +150,13 @@ const Footer = () => {
 
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm text-gray-400 mb-6 md:mb-0">
-              <a className="group relative hover:text-white transition-colors duration-300">
+              <button
+                onClick={() => setPrivacyPolicyOpen(true)}
+                className="group relative hover:text-white transition-colors duration-300 cursor-pointer"
+              >
                 <span className="relative z-10">Privacy Policy</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-purple-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -inset-2"></div>
-              </a>
+              </button>
               <button
                 onClick={() => setTermsOpen(true)}
                 className="group relative hover:text-white transition-colors duration-300 cursor-pointer"
@@ -189,6 +194,10 @@ const Footer = () => {
       <CookiePolicyModal
         isOpen={cookiePolicyOpen}
         onClose={() => setCookiePolicyOpen(false)}
+      />
+      <PrivacyPolicyModal
+        isOpen={privacyPolicyOpen}
+        onClose={() => setPrivacyPolicyOpen(false)}
       />
       <TermsOfServiceModal
         isOpen={termsOpen}
