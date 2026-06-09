@@ -66,7 +66,7 @@ Allowed scopes (loose): `auth`, `jobs`, `employer`, `admin`, `ui`, `context`, `s
 - **What** — one-sentence summary of the change.
 - **Why** — motivation or linked issue.
 - **How to test** — concrete steps a reviewer can follow in the browser.
-- **Screenshots** — required for any UI change.
+- **QA evidences** — required for any feature change.
 
 **Review checklist (author self-review before requesting):**
 - [ ] No `console.log` or debug statements left in code.
