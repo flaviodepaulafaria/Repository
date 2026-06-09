@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CookiePolicyModal from "./CookiePolicyModal";
+import TermsOfServiceModal from "./TermsOfServiceModal";
 
 const Footer = () => {
   const [cookiePolicyOpen, setCookiePolicyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
 
   return (
     <>
@@ -150,10 +152,13 @@ const Footer = () => {
                 <span className="relative z-10">Privacy Policy</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-purple-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -inset-2"></div>
               </a>
-              <a className="group relative hover:text-white transition-colors duration-300">
+              <button
+                onClick={() => setTermsOpen(true)}
+                className="group relative hover:text-white transition-colors duration-300 cursor-pointer"
+              >
                 <span className="relative z-10">Terms of Service</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-600/20 to-purple-600/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -inset-2"></div>
-              </a>
+              </button>
               <button
                 onClick={() => setCookiePolicyOpen(true)}
                 className="group relative hover:text-white transition-colors duration-300 cursor-pointer"
@@ -184,6 +189,10 @@ const Footer = () => {
       <CookiePolicyModal
         isOpen={cookiePolicyOpen}
         onClose={() => setCookiePolicyOpen(false)}
+      />
+      <TermsOfServiceModal
+        isOpen={termsOpen}
+        onClose={() => setTermsOpen(false)}
       />
     </>
   );
