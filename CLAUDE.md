@@ -9,6 +9,80 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` — ESLint (flat config, JS/JSX only)
 - `npm run preview` — Preview production build
 
+## Git Workflow
+
+### Branch Naming
+
+Branches follow the pattern `<type>/<short-description>` using kebab-case:
+
+| Type | When to use |
+|---|---|
+| `feat/` | New feature or functionality |
+| `fix/` | Bug fix |
+| `refactor/` | Code restructuring without behavior change |
+| `chore/` | Tooling, deps, config, CI — no production code |
+| `docs/` | Documentation only |
+| `test/` | Adding or fixing tests |
+| `hotfix/` | Urgent fix that goes directly to `master` |
+
+Examples: `feat/employer-dashboard`, `fix/login-redirect-loop`, `chore/update-vite-7`.
+
+- Keep descriptions short (2–4 words) and in English.
+- No ticket numbers in branch names unless the team starts using an issue tracker — keep names self-explanatory.
+- Delete branches after merging (`git branch -d` locally, delete on remote).
+
+### Commit Messages
+
+Follow **Conventional Commits** (`<type>(<scope>): <subject>`):
+
+```
+feat(auth): add remember-me checkbox to login form
+fix(jobs): prevent duplicate application on double-click
+refactor(context): split JobContext into apply and save slices
+chore(deps): upgrade react-router to 7.6
+```
+
+Rules:
+- Subject line ≤ 72 characters, imperative mood ("add", not "added" or "adds").
+- No period at the end of the subject line.
+- Leave a blank line before the optional body.
+- Body explains **why**, not what — the diff already shows what changed.
+- Never use `--no-verify` to skip hooks; fix the underlying lint/test issue instead.
+
+Allowed types: `feat`, `fix`, `refactor`, `chore`, `docs`, `test`, `style`, `perf`, `ci`.
+Allowed scopes (loose): `auth`, `jobs`, `employer`, `admin`, `ui`, `context`, `services`, `deps`, `config`.
+
+### Pull Requests
+
+**Before opening a PR:**
+1. `npm run lint` must pass with zero errors.
+2. `npm run build` must succeed.
+3. Manually smoke-test the feature/fix in the browser (`npm run dev`).
+4. Rebase or merge `master` into your branch to stay current — resolve all conflicts locally.
+
+**PR title** mirrors the commit subject: `feat(employer): add applicant status filter`.
+
+**PR description must include:**
+- **What** — one-sentence summary of the change.
+- **Why** — motivation or linked issue.
+- **How to test** — concrete steps a reviewer can follow in the browser.
+- **Screenshots** — required for any UI change.
+
+**Review checklist (author self-review before requesting):**
+- [ ] No `console.log` or debug statements left in code.
+- [ ] No hardcoded strings that should be constants or config.
+- [ ] New localStorage keys added to the key list in this file.
+- [ ] Context provider nesting order in `App.jsx` unchanged (or updated here if it changed).
+- [ ] ESLint passes; no new `eslint-disable` comments without explanation.
+- [ ] Accessible: interactive elements have labels, color is not the sole indicator.
+
+**Reviewer responsibilities:**
+- Approve only when all checklist items are satisfied.
+- Leave actionable comments — "nit:", "suggestion:", or "blocker:" prefixes help triage.
+- Do not approve your own PR unless it is a solo `chore` or `docs` commit.
+
+**Merge strategy:** Squash-and-merge into `master` to keep history linear. The squash commit message must follow Conventional Commits format.
+
 ## Architecture
 
 React 19 SPA using Vite 7, Tailwind CSS 4, and React Router 7. No TypeScript — plain JSX throughout.
